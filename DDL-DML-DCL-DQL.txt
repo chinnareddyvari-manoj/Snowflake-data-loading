@@ -1,0 +1,125 @@
+create database SQL;
+create schema statements;
+//DDL COMMANDS:DATA DEFINATION LANGAUAGE-CREATE,ALTER,DROP
+create table book(adhar_num number,name string,address string,mobil_num number,email text);
+//here i want to add one column by using alter keyword
+alter table book add(slot number);
+desc table book;
+// here i am droping the colunm slot
+alter table book drop slot;
+drop table book;
+undrop table book;
+//DML COMMANDS: DATA MANUFLATION LANGUAGE-INSERT,UPDATE,DELETE,MERGE,TRANCATE
+insert into book(adhar_num,name,mobil_num) values(123467890,'manoj',6301621568);
+insert into book(adhar_num,name) values(0123467890,'reddy');
+insert into book(adhar_num,name,mobil_num,email) values(123467890,'chinni',6301621568,'reddyvarimanoj@gmail.com');
+insert into book(adhar_num,name,mobil_num) values(123467890,'stop',6301621568);
+update book set name='dinesh' where adhar_num=0123467890; 
+delete from book where name='dinesh';
+select * from book;
+// practicing sql querisL:
+create table person(p_id int,first_name string,last_name string,address string,city string);
+desc table person;
+insert into person values(1,'Hansen','Ola','Timoteivn 10','Sandnes');
+insert into person values(2,'Svendson','Tove','Borgvn 23','Sandnes');
+insert into person values(3,'Pettersen','Kari', 'Storgt 20','Stavanger');
+insert into person values(4,'Nilsen' ,'Tom', 'Vingvn 23' ,'Stavanger');
+select * from person;
+//1
+select first_name,last_name from person;
+//2
+select distinct city from person;
+//3
+select * from person where city='Sandnes';
+//4
+select * from person where last_name='Tove' and first_name='Svendson';
+//5
+select * from person where last_name='Tove' or last_name='Ola';
+//6
+select * from person where first_name='Svendson' and (last_name='Tove' or last_name='ola');
+//7
+select * from person order by first_name;
+//8 
+select * from person order by first_name desc;
+//9
+insert into person(p_id,first_name,last_name) values(5, 'Tjessem', 'Jakob');
+//10
+update person set address='kr_puram',city='bangalore' where p_id=5;
+//11
+delete from person where p_id=5;
+//12
+select top 2 * from person;
+//13
+SELECT TOP 50 PERCENT * FROM person;
+//14
+select * from person where city like'Sa%';
+//15
+select * from person where city like'%nes%';
+//16
+select * from person where last_name like'_la';
+//17
+select * from person where first_name like'S_end_on';
+//18
+SELECT * FROM person
+WHERE first_name LIKE '[spb]%';
+//19
+select * from person where city like 'S%';
+//20
+select * from person where city like '_tav%';
+//21
+select * from person where city not like '%tav%';
+//22
+select * from person where first_name in('Hansen','Pettersen');
+//23
+select * from person where first_name not between 'Hansen' and 'Pettersen';
+//24 joins 
+create table orders(or_id number,order_num number,p_id number);
+insert into orders values(1,77895,3),(2,44678,3),(3,22456,1),(4,24562,1),
+(5,34764,15);
+select * from orders;
+select A.first_name,A.LAST_NAME,A.ADDRESS,A.CITY,B.OR_ID,B.ORDER_NUM from person A inner join orders B on A.P_ID=b.p_id;
+//25 left join
+select A.first_name,A.LAST_NAME,B.ORDER_NUM from person a left join orders b on a.p_id=b.p_id;
+//26 
+select A.first_name,A.LAST_NAME,B.ORDER_NUM from person a right join orders b on a.p_id=b.p_id;
+//27
+select A.first_name,A.LAST_NAME,B.ORDER_NUM from person a full join orders b on a.p_id=b.p_id;
+//28
+select * from person
+unionall
+select * from orders;
+select current_date();
+select current_secondary_roles();
+select current;
+create table dat( get_data number, yor number, months string);
+insert into dat values(06,2022,'june');
+SELECT EXTRACT(YEAR FROM TO_DATE(your_column, 'YYYY-MM-DD')) FROM your_table;
+select current_date;
+SELECT TO_DATE('2024-06-18', 'YYYY-MM-DD');
+//Extracting Date Parts:
+SELECT EXTRACT(YEAR FROM CURRENT_DATE);
+SELECT DATE_PART('year', CURRENT_DATE);
+//Date Arithmetic:
+SELECT DATEADD(day, 10, CURRENT_DATE);  -- Adds 10 days to the current date
+SELECT DATEDIFF(day, '2024-01-01', '2024-06-18');  -- Returns the difference in days
+SELECT DATE_TRUNC('month', CURRENT_DATE);  -- Truncates to the first day of the month
+//Conversion Functions:
+SELECT TO_DATE('2024-06-18', 'YYYY-MM-DD');
+SELECT TO_TIMESTAMP('2024-06-18 12:34:56', 'YYYY-MM-DD HH24:MI:SS');
+SELECT TO_CHAR(CURRENT_DATE, 'YYYY-MM-DD');
+//Miscellaneous Functions:
+SELECT DAYNAME(CURRENT_DATE);   -- Returns the day name (e.g., 'Tuesday')
+SELECT DAYOFMONTH(CURRENT_DATE);  -- Returns the day of the month (e.g., 18)
+SELECT DAYOFWEEK(CURRENT_DATE);  -- Returns the day of the week number
+SELECT DAYOFYEAR(CURRENT_DATE);  -- Returns the day of the year (e.g., 169)
+SELECT LAST_DAY(CURRENT_DATE, 'month');  -- Returns the last day of the month
+SELECT 
+    DATE_TRUNC('month', CURRENT_DATE) AS first_day_of_month,
+    LAST_DAY(CURRENT_DATE, 'month') AS last_day_of_month;
+SELECT 
+    TO_DATE('2024-06-18', 'YYYY-MM-DD') AS converted_date,
+    EXTRACT(YEAR FROM TO_DATE('2024-06-18', 'YYYY-MM-DD')) AS year_extracted;
+//date functions
+SELECT get_ddl();
+
+SELECT GETDATE()
