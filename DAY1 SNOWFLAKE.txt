@@ -1,0 +1,81 @@
+create database vivision; 
+show databases;
+create schema vivision.vision
+create or replace table vivision.vision.emp
+(eid number,ename string,salary float,gender string,joiningdata string)
+desc table vivision.vision.emp;
+insert into vivision.vision.emp(eid,ename,salary,gender,joiningdata) values(101,'manoj',25000.60,'male','10-06-2024')
+insert into vivision.vision.emp(eid,ename,salary,gender,joiningdata) values(102,'teju',25000.80,'male','10-06-2024')
+select * from vivision.vision.emp
+update vivision.vision.emp set ename='dinesh' where eid=102
+delete from vivision.vision.emp where eid=102 
+create database hr;
+
+create schema hr.vivision ;
+
+show databases; 
+
+
+create or replace table hr.vivision.employee (
+eid int ,
+ename string,
+salary float,
+jod string
+)
+
+desc table hr.vivision.employee;
+
+
+insert into hr.vivision.employee  (eid,ename,salary,jod) values 
+                                  (101,'bhanu',20308.30,'10-06-2024');
+ 
+insert into hr.vivision.employee  (eid,ename,salary,jod) values 
+                                  (102,'Sreekanth',30308.30,'10-06-2024');                                 
+select * from hr.vivision.employee;
+
+update hr.vivision.employee 
+   set ename = 'Bhanu Sharn'
+where eid = 101 ;
+
+
+delete from hr.vivision.employee
+          where eid in (111,101,103) ;
+
+drop table hr.vivision.employee ;
+
+	------------------
+	
+	
+ 
+CREATE TABLE employees (
+	employee_id INT IDENTITY(1,1) PRIMARY KEY,
+	first_name VARCHAR (20) DEFAULT NULL,
+	last_name VARCHAR (25) NOT NULL,
+	email VARCHAR (100) NOT NULL,
+	phone_number VARCHAR (20) DEFAULT NULL,
+	hire_date DATE NOT NULL,
+	job_id INT NOT NULL,
+	salary DECIMAL (8, 2) NOT NULL,
+	manager_id INT DEFAULT NULL,
+	department_id INT DEFAULT NULL
+) 
+
+show tables;
+
+desc table employees;
+
+select * from employees;
+
+select count(*) from employees;
+CREATE TABLE regions (
+	region_id INT IDENTITY(1,1) PRIMARY KEY,
+	region_name VARCHAR (25) DEFAULT NULL
+);
+//SET IDENTITY_INSERT regions ON;
+  
+INSERT INTO regions(region_id,region_name) VALUES (1,'Europe');
+INSERT INTO regions(region_id,region_name) VALUES (2,'Americas');
+INSERT INTO regions(region_id,region_name) VALUES (3,'Asia');
+INSERT INTO regions(region_id,region_name) VALUES (4,'Middle East and Africa');
+desc table regions
+select * from regions

@@ -1,0 +1,118 @@
+select * from jobs where job_id in(select * from departments where department_id in(1,3,5,9);)
+create or replace table emp_new as (select * from employees)
+select * from emp_new
+--uninion will not allow duplicates 
+select first_name from emp_new 
+    union 
+select first_name from employees 
+
+--uninion will allow duplciates / it will take all the values from both the tables
+select first_name from emp_new 
+    union all
+select first_name from employees 
+
+
+
+select first_name from emp_new 
+    union all
+select salary from employees 
+
+
+-----------------------------
+
+select * from employees
+
+
+    select emp.employee_id 
+           ,emp.first_name
+           ,emp.salary
+           ,emp.department_id
+           ,dep.relationship
+           ,dep.first_name
+     from employees  emp inner join 
+        dependents dep
+    on emp.employee_id = dep.employee_id ;
+
+
+
+
+    select * 
+     from employees  where employee_id in( 
+                select employee_id from dependents
+     )                 
+
+           
+
+    select * 
+     from employees  where employee_id not in( 
+                select employee_id from dependents
+     )                 
+
+
+
+select * from dependents where employee_id = 123;
+
+
+
+select salary 
+     from employees
+      order by 1 desc 
+
+
+      
+select max(salary )
+     from employees where salary not in (
+                select max(salary )
+                from employees )
+create or replace table col(col1 string, col2 string,col3 string, col4 string )
+insert into col values('p','a','b','c');
+insert into col values('a','p','b','c');
+insert into col values('b','a','p','c');
+insert into col values('p','a','b','p');
+commit;
+select * from col
+select sum(regexp_count( concat(col1,col2,col3,col4),'p')) as "ouccy of p" from col
+select sum(col) as "col p" 
+from (
+select count(*) col from col where col1='p'
+union all
+select count(*) from col where col2='p'
+union all
+select count(*) from col where col3='p'
+union all
+select count(*) from col where col4='p')
+//practice
+select null||'manoj'
+create or replace table test(Num number)
+insert into test values(1);
+insert into test values(2);
+insert into test values(3);
+insert into test values(-10);
+insert into test values(4);
+insert into test values(-199);
+insert into test values(30);
+insert into test values(40);
+insert into test values(-200)
+insert into test values(0)
+select * from test
+select *, case when NUM>0 then'positive'
+            when NUM<0 then'negative'
+            else '0 is not positive nor negative'
+            end as result
+            from test
+select Num, nvl(case when num>0 then num else'0' end,0) as "Positive",
+            nvl(case when num<0 then num else'0' end,0) as "Negative"
+         from test
+create or replace table test2 (
+num1 int
+)
+insert into test2(num1) values(1),(-1),(20),(-58),(123),(-55);
+insert into test2(num1) values(0);
+select * from test2
+
+select sum((case when num1>0 then num1 else null end)) as "positive" ,
+       sum((case when num1<0 then num1 else null end)) as "negative"
+from test2
+
+
+
